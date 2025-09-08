@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Snapp Food </title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>  
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <div class="brand-area">
+        <h1 id="brand" class="brand">snapp food</h1>
+        <span id="discount-badge" class="discount-badge">٪۱۰ تخفیف اولین سفارش شما</span>
+      </div>
+    </div>
+  </header>
+  <!-- MAIN -->
+  <main class="container" role="main">
+    <section class="menu-section" aria-labelledby="menu-title">
+      <h2 id="menu-title" class="section-title">منو</h2>
+      <div id="menu" class="menu-grid" aria-live="polite">
+        <!--card 1-->
+        <article class="menu-card" id="product-4" data-id="4" data-price="320000" role="article">
+          <div class="card-image" aria-hidden="true"><img src="https://www.gimmesomeoven.com/wp-content/uploads/2020/04/Alfredo-Sauce-9.jpg"></div>
+          <div class="card-body">
+            <h3 class="product-name">پاستا آلفردو</h3>
+            <p class="product-desc">سس خامه‌ای، قارچ، مرغ</p>
+            <div class="card-bottom">
+              <span class="price" aria-hidden="true">۳۲۰٬۰۰۰ تومان</span>
+              <button class="btn add-btn" id="add-4" data-product-id="4" aria-label="افزودن پاستا آلفردو به سبد">افزودن به سبد</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- card 2-->
+        <article class="menu-card" id="product-3" data-id="3" data-price="280000" role="article">
+          <div class="card-image" aria-hidden="true"><img src="https://appetizing-cactus-7139e93734.media.strapiapp.com/large_Ultimate_Double_Cheeseburger_da3c3f6a9b.jpeg"></div>
+          <div class="card-body">
+            <h3 class="product-name">برگر دوبل</h3>
+            <p class="product-desc">گوشت دوبل، پنیر چدار</p>
+            <div class="card-bottom">
+              <span class="price" aria-hidden="true">۲۸۰٬۰۰۰ تومان</span>
+              <button class="btn add-btn" id="add-3" data-product-id="3" aria-label="افزودن برگر دوبل به سبد">افزودن به سبد</button>
+            </div>
+          </div>
+        </article>
+
+        <!--card 3-->
+        <article class="menu-card" id="product-2" data-id="2" data-price="360000" role="article">
+          <div class="card-image" aria-hidden="true"><img src="https://www.reggiadicasertaunofficial.it/wp-content/uploads/pizza-margherita-la-vera-storia-1200x900.webp"></div>
+          <div class="card-body">
+            <h3 class="product-name">پیتزا مارگاریتا</h3>
+            <p class="product-desc">سس گوجه، پنیر موزارلا</p>
+            <div class="card-bottom">
+              <span class="price" aria-hidden="true">۳۶۰٬۰۰۰ تومان</span>
+              <button class="btn add-btn" id="add-2" data-product-id="2" aria-label="افزودن پیتزا مارگاریتا به سبد">افزودن به سبد</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- card 4-->
+        <article class="menu-card" id="product-1" data-id="1" data-price="190000" role="article">
+          <div class="card-image" aria-hidden="true"><img src="https://cookingwithayeh.com/wp-content/uploads/2023/11/Healthy-Caesar-Salad-Without-Anchovies-SQ-5.jpg"></div>
+          <div class="card-body">
+            <h3 class="product-name">سالاد سزار</h3>
+            <p class="product-desc">کاهو، نان تست، سس سزار</p>
+            <div class="card-bottom">
+              <span class="price" aria-hidden="true">۱۹۰٬۰۰۰ تومان</span>
+              <button class="btn add-btn" id="add-1" data-product-id="1" aria-label="افزودن سالاد سزار به سبد">افزودن به سبد</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CART SECTION -->
+    <aside class="cart-section" aria-labelledby="cart-title">
+      <h2 id="cart-title" class="section-title">سبد خرید</h2>
+
+      <!-- سبد -->
+      <div id="cart" class="cart-box" role="region" aria-live="polite">
+        <p class="cart-empty">سبد شما خالی است.</p>
+      </div>
+      <div class="cart-footer">
+        <div class="totals" id="cart-totals" aria-hidden="true">
+        </div>
+
+        <div class="actions">
+          <button id="order-btn" class="btn primary" aria-label="ثبت سفارش">ثبت سفارش</button>
+          <p id="order-status" class="order-status" aria-live="polite"></p>
+        </div>
+      </div>
+    </aside>
+  </main>
+  <script src="index.js" defer></script>
+</body>
+</html>
