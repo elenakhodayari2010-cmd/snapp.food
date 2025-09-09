@@ -4,27 +4,31 @@
     "name": "سالاد سزار",
     "desc": "کاهو، نان تست، سس سزار",
     "price": 190000,
-    "image": "images/salad.jpg"
+    "image": "images/salad.jpg",
+    "time": 10
   },
   {
     "id": 2,
     "name": "پیتزا مارگاریتا",
     "desc": "سس گوجه، پنیر موزارلا",
-    "price": 350000,
-    "image": "images/pizza.jpg"
+    "price": 360000,
+    "image": "images/pizza.jpg",
+    "time": 30
   },
   {
     "id": 3,
     "name": "برگر دوبل",
     "desc": "گوشت دوبل، پنیر چدار",
     "price": 280000,
-    "image": "images/burger.jpg"
+    "image": "images/burger.jpg",
+    "time": 20
   },
   {
     "id": 4,
     "name": "پاستا آلفردو",
     "desc": "سس خامه‌ای، قارچ، مرغ",
-    "price": 340000,
-    "image": "images/pasta.jpg"
+    "price": 320000,
+    "image": "images/pasta.jpg",
+    "time": 15
   }
 ]
