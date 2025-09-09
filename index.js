@@ -50,7 +50,7 @@ function renderCart() {
     <b>قابل پرداخت: ${finalTotal.toLocaleString()} تومان</b>
   `;
 }
-// ثبت سفارش
+// /ثبت سفارش
 orderBtn.addEventListener("click", () => {
   if (cart.length === 0) {
     alert("سبد شما خالی است!");
