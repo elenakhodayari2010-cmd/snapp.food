@@ -1,3 +1,4 @@
+
 let doubleburger = 0;
 let cesarsalad = 0;
 let pastaalfredo = 0;
@@ -8,8 +9,8 @@ async function fetchData() {
   try {
     const response = await fetch('index.json');
     data = await response.json();
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 }
 fetchData();
