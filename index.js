@@ -1,78 +1,93 @@
-const cart = [];
-const cartBox = document.getElementById("cart");
-const cartTotals = document.getElementById("cart-totals");
-const orderBtn = document.getElementById("order-btn");
-const orderStatus = document.getElementById("order-status");
+let doubleburger = 0;
+let cesarsalad = 0;
+let pastaalfredo = 0;
+let pizzamargherita = 0;
+let firstb = true;
+let data = [];
+async function fetchData() {
+  try {
+    const response = await fetch('index.json');
+    data = await response.json();
+  } catch (err) {
+    console.log(err);
+  }
+}
+fetchData();
 
-let menu = [];
+function cartTotal() {
+  const total = (doubleburger * data[2].price) +
+                (cesarsalad * data[0].price) +
+                (pastaalfredo * data[3].price) +
+                (pizzamargherita * data[1].price);
+  return firstb ? Math.round(total * 0.9) : total;
+}
+function updateCart() {
+  const cart = document.getElementById('cart');
+  if (!cart) return;
 
-// خواندن JSON از فایل جدا
-fetch("menu.json")
-  .then(response => response.json())
-  .then(data => {
-    menu = data;
-  })
-  .catch(err => console.error("خطا در خواندن فایل JSON:", err));
+  let html = '';
+  if (doubleburger) html += `${doubleburger} عدد برگر دوبل - ${doubleburger * data[2].price} تومان<br>`;
+  if (cesarsalad) html += `${cesarsalad} عدد سالاد سزار - ${cesarsalad * data[0].price} تومان<br>`;
+  if (pastaalfredo) html += `${pastaalfredo} عدد پاستا آلفردو - ${pastaalfredo * data[3].price} تومان<br>`;
+  if (pizzamargherita) html += `${pizzamargherita} عدد پیتزا مارگاریتا - ${pizzamargherita * data[1].price} تومان<br>`;
 
-// گرفتن تمام دکمه‌های افزودن به سبد
-document.querySelectorAll(".add-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const card = btn.closest(".menu-card");
-    const id = parseInt(card.dataset.id);
-    const name = card.dataset.name;
-    const price = parseInt(card.dataset.price);
-
-    // گرفتن زمان از JSON بر اساس id
-    const item = menu.find(m => m.id === id);
-    const time = item ? item.time : 0;
-
-    const found = cart.find(p => p.id === id);
-    if (found) {
-      found.qty++;
-    } else {
-      cart.push({ id, name, price, time, qty: 1 });
-    }
-
-    renderCart();
-  });
-});
-
-// تابع سبد خرید
-function renderCart() {
-  if (cart.length === 0) {
-    cartBox.innerHTML = `<p class="cart-empty">سبد شما خالی است.</p>`;
-    cartTotals.innerHTML = "";
-    orderStatus.textContent = "";
-    return;
+  if (doubleburger || cesarsalad || pastaalfredo || pizzamargherita) {
+    html += `<b>جمع کل: ${cartTotal()} تومان${firstb ? ' (۱۰٪ تخفیف اولین سفارش اعمال شد)' : ''}</b>`;
+  } else {
+    html = `<p class="cart-empty">سبد شما خالی است.</p>`;
   }
 
-  let total = 0;
-  let totalTime = 0;
-  let html = "";
-  cart.forEach(p => {
-    const itemTotal = p.price * p.qty;
-    total += itemTotal;
-    totalTime += p.time * p.qty;
-    html += `<p>${p.name} × ${p.qty} = ${itemTotal.toLocaleString()} تومان (زمان آماده‌سازی: ${p.time} دقیقه)</p>`;
-  });
-
-  const discount = Math.round(total * 0.1);
-  const finalTotal = total - discount;
-
-  cartBox.innerHTML = html;
-  cartTotals.innerHTML = `
-    <p>مجموع: ${total.toLocaleString()} تومان</p>
-    <p>تخفیف: ${discount.toLocaleString()} تومان</p>
-    <b>قابل پرداخت: ${finalTotal.toLocaleString()} تومان</b>
-    <p>زمان کل: ${totalTime} دقیقه</p>
-  `;
+  cart.innerHTML = html;
 }
 
-// ثبت سفارش
-orderBtn.addEventListener("click", () => {
-  if (cart.length === 0) {
-    alert("سبد شما خالی است!");
+function foods(food) {
+  if (food === 'doubleburger') doubleburger++;
+  else if (food === 'cesarsalad') cesarsalad++;
+  else if (food === 'pastaalfredo') pastaalfredo++;
+  else if (food === 'pizzamargherita') pizzamargherita++;
+
+  updateCart();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.add-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-product-id');
+      let food;
+      if (id === '1') food = 'cesarsalad';
+      else if (id === '2') food = 'pizzamargherita';
+      else if (id === '3') food = 'doubleburger';
+      else if (id === '4') food = 'pastaalfredo';
+      foods(food);
+    });
+  });
+
+  const submitBtn = document.getElementById('order-btn');
+  if (submitBtn) submitBtn.addEventListener('click', submit);
+});
+
+function submit() {
+  if (!doubleburger && !cesarsalad && !pastaalfredo && !pizzamargherita) {
+    alert('لطفا غذایی را انتخاب کنید!');
     return;
   }
-  orderStatus.textContent = "سفارش شما ثبت شد و به زودی آماده می‌شود!";
-});
+
+  const time = pizzamargherita * data[1].time +
+               pastaalfredo * data[3].time +
+               doubleburger * data[2].time +
+               cesarsalad * data[0].time;
+
+  const status = document.getElementById('order-status');
+  if (status) {
+    status.innerHTML = `سفارش شما تا ${time} دقیقه دیگر آماده خواهد شد | جمع کل: ${cartTotal()} تومان`;
+    status.style.color = 'green';
+  }
+
+  doubleburger = 0;
+  cesarsalad = 0;
+  pastaalfredo = 0;
+  pizzamargherita = 0;
+  firstb = false;
+
+  updateCart();
+}
